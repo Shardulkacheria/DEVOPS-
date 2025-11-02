@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     stages {
-<<<<<<< HEAD
         stage('Build') {
             steps {
                 echo 'Building Application...'
@@ -16,22 +15,6 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying Application...'
-=======
-        stage('Checkout Code') {
-            steps {
-                git 'https://github.com/Shardulkacheria/DEVOPS-'
-            }
-        }
-        stage('Build Docker Image') {
-            steps {
-                bat 'docker build -t hello-devops .'
-            }
-        }
-        stage('Run Docker Container') {
-            steps {
-                bat 'docker rm -f devops-container || exit 0'
-                bat 'docker run -d -p 5000:3000 --name devops-container hello-devops'
->>>>>>> 7c642140996450bba051a0c73e3349ca98c5f2db
             }
         }
     }
