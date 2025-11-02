@@ -2,14 +2,21 @@ pipeline {
     agent any
 
     stages {
-        stage('Clone Repo') {
-            steps { git 'https://github.com/Shardulkacheria/DEVOPS-' }
+        stage('Checkout Code') {
+            steps {
+                git 'https://github.com/Shardulkacheria/DEVOPS-'
+            }
         }
         stage('Build Docker Image') {
-            steps { sh 'docker build -t hello-devops ./app' }
+            steps {
+                bat 'docker build -t hello-devops .'
+            }
         }
-        stage('Run Container') {
-            steps { sh 'docker run -d -p 5000:3000 --name devops hello-devops' }
+        stage('Run Docker Container') {
+            steps {
+                bat 'docker rm -f devops-container || exit 0'
+                bat 'docker run -d -p 5000:3000 --name devops-container hello-devops'
+            }
         }
     }
 }
